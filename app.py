@@ -32,6 +32,7 @@ def hello():
 
 @app.route('/predict', methods=['POST'])
 def predict():
+    # for API calls
     if request.method == 'POST':
         file = request.files['file']
         file = Image.open(file).convert('L')
@@ -41,6 +42,7 @@ def predict():
 
 @app.route("/test", methods=['GET', 'POST'])
 def test():
+    # for test images
     listStatus = [(id, filename) for id, filename in enumerate(files)]
     select = request.form.get('image_select')
     select = int(select)
@@ -53,6 +55,7 @@ def test():
 
 @app.route("/url_input" , methods=['GET', 'POST'])
 def url_input():
+    # for URL inputs
     select = request.form.get('url_select')
     response = requests.get(select)
     file = BytesIO(response.content)

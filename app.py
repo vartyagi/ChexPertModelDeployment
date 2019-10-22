@@ -32,7 +32,7 @@ def hello():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    # for API calls
+    # for external API calls
     if request.method == 'POST':
         file = request.files['file']
         file = Image.open(file).convert('L')

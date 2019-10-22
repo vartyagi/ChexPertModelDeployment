@@ -19,7 +19,6 @@ df_valid = df_valid[['NewPath', 'Cardiomegaly', 'Edema', 'Atelectasis',
          'Pleural Effusion', 'Consolidation']]
 
 files = df_valid['NewPath'].values
-print(files[0])
 app = Flask(__name__)
 
 
@@ -37,7 +36,6 @@ def predict():
         file = request.files['file']
         file = Image.open(file).convert('L')
         class_pred = get_prediction(file)
-        print(class_pred)
         return jsonify(class_pred)
 
 
@@ -49,8 +47,6 @@ def test():
     file = os.path.join('static', files[select])
     class_pred = get_prediction(Image.open(file).convert('L'))
     true_label = df_valid.iloc[select].drop(['NewPath']).to_dict()
-    print(class_pred)
-    print(true_label)
     model_output = [(key, class_pred[key], true_label[key]) for key in class_pred.keys()]
     return render_template('index.html', listStatus=listStatus, default=select, img1=file, model_output=model_output)
 

@@ -10,8 +10,8 @@ import requests
 dir_ = 'static/CheXpert-v1.0-small'
 df_valid = pd.read_csv(dir_+'/'+'valid.csv')
 a = df_valid['Path'].str.split("/", expand=True)
-df_valid['patient']=a[2].str.replace('patient','').astype(int)
-df_valid['study'] = a[3].str.replace('study','').astype(int)
+df_valid['patient']=a[2].str.replace('patient', '').astype(int)
+df_valid['study'] = a[3].str.replace('study', '').astype(int)
 df_valid['view'] = a[4].str.split('_', expand=True)[0].str.replace('view', '').astype(int)
 df_valid = df_valid[df_valid['Frontal/Lateral'] == 'Frontal']
 df_valid['NewPath'] = df_valid['Path']

@@ -39,7 +39,7 @@ def predict():
         return jsonify(class_pred)
 
 
-@app.route("/test" , methods=['GET', 'POST'])
+@app.route("/test", methods=['GET', 'POST'])
 def test():
     listStatus = [(id, filename) for id, filename in enumerate(files)]
     select = request.form.get('image_select')

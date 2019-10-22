@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Test</title>
+  <meta name="generator" content="Google Web Designer 7.0.0.0923">
+  <style type="text/css" id="gwd-text-style">
+    p {
+      margin: 0px;
+    }
+    h1 {
+      margin: 0px;
+    }
+    h2 {
+      margin: 0px;
+    }
+    h3 {
+      margin: 0px;
+    }
+  </style>
+  <style type="text/css">
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0px;
+    }
+    body {
+      transform: perspective(1400px) matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+      transform-style: preserve-3d;
+      background-image: none;
+      background-color: rgb(144, 133, 211);
+    }
+    .gwd-img-nhsp {
+      position: absolute;
+      width: 292px;
+      height: 256px;
+      left: 34px;
+      top: 399px;
+    }
+    .gwd-form-1llj {
+      position: absolute;
+      width: 230px;
+      height: 178px;
+      left: 16px;
+      top: 53px;
+    }
+    .form-urlinp {
+      position: absolute;
+      width: 230px;
+      height: 178px;
+      left: 278px;
+      top: 7px;
+    }
+    .gwd-select-mu84 {
+      position: absolute;
+      width: 164px;
+      height: 25px;
+      left: 54px;
+      top: 269px;
+    }
+    .gwd-input-1 {
+      position: absolute;
+      width: 159px;
+      height: 28px;
+      left: 40px;
+      top: 257px;
+    }
+    .gwd-input-2 {
+      position: absolute;
+      height: 28px;
+      width: 357px;
+      transform-origin: 180.5px 17px 0px;
+      left: 123px;
+      top: 253px;
+    }
+    .gwd-input-submit {
+      position: absolute;
+      width: 159px;
+      height: 28px;
+      left: 124px;
+      top: 304px;
+    }
+    .gwd-table-nemp {
+      position: absolute;
+      height: 279px;
+      width: 369px;
+      transform-origin: 194.5px 139.5px 0px;
+      left: 411px;
+      top: 399px;
+    }
+    table, th, td {
+      border: 1px solid black;
+    }
+    .gwd-h1-13ve {
+      position: absolute;
+      width: 678px;
+      height: 74px;
+      transform-origin: 26.1304px 18.5px 0px;
+      left: 319px;
+      top: -32px;
+    }
+    .gwd-h1-1rpw {
+      position: absolute;
+      left: 16px;
+      width: 303px;
+      height: 109px;
+      transform-origin: 32.9896px 42.9043px 0px;
+      top: 89px;
+    }
+    .gwd-strong-ivvj {
+      font-size: 16px;
+      left: 0px;
+      top: 15px;
+      height: 91px;
+      transform-origin: 0px 0px 0px;
+      width: 342px;
+    }
+    .gwd-span-1b5z {
+      position: absolute;
+      font-weight: bold;
+      font-size: 16px;
+      width: 329px;
+      height: 79px;
+      transform-origin: 102.812px 81.1944px 0px;
+      left: 387px;
+      top: 121px;
+    }
+    .gwd-span-97iw {
+      position: absolute;
+      width: 213px;
+      height: 25px;
+      font-weight: bold;
+      font-size: 24px;
+      left: 39px;
+      top: 312px;
+    }
+    .gwd-span-1g01 {
+      position: absolute;
+      height: 29px;
+      left: 413px;
+      top: 310px;
+      font-size: 24px;
+      font-weight: bold;
+      width: 261px;
+      transform-origin: 122.452px 12.5px 0px;
+    }
+    .gwd-strong-12yq {
+      position: absolute;
+      left: 283px;
+      top: 198px;
+    }
+    .gwd-span-1q88 {
+      font-size: 42px;
+    }
+  </style>
+</head>
+
+<body class="htmlNoPages">
+  <img class="gwd-img-nhsp" src="{{img1}}">
+  <form class="gwd-form-1llj" method="POST" action="{{ url_for('test') }}" id="test_submit">
+    <input type="submit" class="gwd-input-1">
+    <h1 class="gwd-h1-13ve">DenseNet 121 X-Ray Prediction</h1>
+    <h1 class="gwd-h1-1rpw"><strong class="gwd-strong-ivvj">1. Choose from 201 X-Ray images from the Stanford CheXPert validation set (labeled by consensus of 5 experts)</strong><br></h1><span class="gwd-span-1b5z">2. Choose from any chest X-Ray image URL from the web</span><span class="gwd-span-97iw">Image Preview&nbsp;</span><span class="gwd-span-1g01">Prediction Probabilities</span><strong class="gwd-strong-12yq"><span class="gwd-span-1q88">OR</span><br></strong></form>
+  <select class="gwd-select-mu84" form="test_submit" name="image_select">
+    {% for value, file in listStatus %}
+    <option value="{{value}}" {% if value== default %} selected {% endif %}>{{value}}</option>
+    {% endfor %}
+  </select>
+  <form class="form-urlinp" method="POST" action="{{ url_for('url_input') }}" id="url_submit">
+    <input type="text" class="gwd-input-2" name="url_select">
+    <input type="submit" class="gwd-input-submit">
+  </form>
+  <table class="gwd-table-nemp">
+    <tbody>
+      <tr>
+        <th>Disease</th>
+        <th>Prediction Probability</th>
+        <th>True Result</th>
+      </tr>
+      {% for key, prediction, true_val in model_output %}
+      <tr>
+        <td>{{key}}</td>
+        <td>{{prediction}}</td>
+        <td>{{true_val}}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</body>
+
+</html>

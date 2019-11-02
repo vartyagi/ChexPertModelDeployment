@@ -19,10 +19,10 @@ df_valid = df_valid[['NewPath', 'Cardiomegaly', 'Edema', 'Atelectasis',
          'Pleural Effusion', 'Consolidation']]
 
 files = df_valid['NewPath'].values
-app = Flask(__name__)
+application = Flask(__name__)
 
 
-@app.route("/")
+@application.route("/")
 def hello():
     listStatus = [(id, filename) for id, filename in enumerate(files)]
     default = 201
@@ -30,7 +30,7 @@ def hello():
     return render_template('index.html', listStatus=listStatus, default=default, img1=img)
 
 
-@app.route('/predict', methods=['POST'])
+@application.route('/predict', methods=['POST'])
 def predict():
     # for external API calls
     if request.method == 'POST':
@@ -40,7 +40,7 @@ def predict():
         return jsonify(class_pred)
 
 
-@app.route("/test", methods=['GET', 'POST'])
+@application.route("/test", methods=['GET', 'POST'])
 def test():
     # for test images
     listStatus = [(id, filename) for id, filename in enumerate(files)]
@@ -53,7 +53,7 @@ def test():
     return render_template('index.html', listStatus=listStatus, default=select, img1=file, model_output=model_output)
 
 
-@app.route("/url_input" , methods=['GET', 'POST'])
+@application.route("/url_input" , methods=['GET', 'POST'])
 def url_input():
     # for URL inputs
     select = request.form.get('url_select')
@@ -67,4 +67,4 @@ def url_input():
 
 
 if __name__ == '__main__':
-    app.run()
+    application.run(debug=False, port=int(os.environ.get('PORT', 5000)))

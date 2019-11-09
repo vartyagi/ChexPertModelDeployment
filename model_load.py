@@ -23,8 +23,3 @@ def transform_image(image_read):
                     ])
     image = image_read
     return my_transforms(image)
-
-
-
-
-

@@ -21,4 +21,3 @@ def get_prediction(image_read):
     y_hat = outputs[0]
     print({labels_list[i]: y_hat[i] for i in range(len(labels_list))})
     return {labels_list[i]: round(y_hat[i].item(),3) for i in range(len(labels_list))}
-

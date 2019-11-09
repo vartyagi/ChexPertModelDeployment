@@ -30,14 +30,14 @@ def hello():
     return render_template('index.html', listStatus=listStatus, default=default, img1=img)
 
 
-@application.route('/predict', methods=['POST'])
+@application.route('/predict', methods=['POST', 'GET'])
 def predict():
     # for external API calls
-    if request.method == 'POST':
-        file = request.files['file']
-        file = Image.open(file).convert('L')
-        class_pred = get_prediction(file)
-        return jsonify(class_pred)
+    #if request.method == 'POST':
+    file = request.files['file']
+    file = Image.open(file).convert('L')
+    class_pred = get_prediction(file)
+    return jsonify(class_pred)
 
 
 @application.route("/test", methods=['GET', 'POST'])

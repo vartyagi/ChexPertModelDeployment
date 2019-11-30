@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>Test</title>
-  <meta name="generator" content="Google Web Designer 7.0.1.1008">
+  <meta name="generator" content="Google Web Designer 7.0.1.1101">
   <style type="text/css" id="gwd-text-style">
     p {
       margin: 0px;
@@ -33,11 +33,11 @@
     }
     .gwd-img-nhsp {
       position: absolute;
-      left: 950px;
-      top: 202px;
       width: 635px;
       height: 530px;
       transform-origin: 317.5px 265px 0px;
+      left: 975px;
+      top: 251px;
     }
     .gwd-form-1llj {
       position: absolute;
@@ -53,19 +53,26 @@
       left: 278px;
       top: 7px;
     }
+    .form-textinp {
+      position: absolute;
+      width: 235px;
+      height: 198px;
+      top: 71px;
+      left: 333px;
+    }
     .gwd-select-mu84 {
       position: absolute;
       width: 164px;
       height: 25px;
-      left: 54px;
-      top: 269px;
+      left: 34px;
+      top: 284px;
     }
     .gwd-input-1 {
       position: absolute;
       width: 159px;
       height: 28px;
-      left: 40px;
-      top: 257px;
+      left: 21px;
+      top: 273px;
     }
     .gwd-input-2 {
       position: absolute;
@@ -133,8 +140,8 @@
       height: 25px;
       font-weight: bold;
       font-size: 24px;
-      left: 1239px;
-      top: 102px;
+      top: 166px;
+      left: 1234px;
     }
     .gwd-span-1g01 {
       position: absolute;
@@ -149,10 +156,81 @@
     .gwd-strong-12yq {
       position: absolute;
       left: 105px;
+      width: 126px;
       top: 368px;
+      height: 48px;
     }
     .gwd-span-1q88 {
       font-size: 42px;
+      left: 0px;
+      top: 1px;
+    }
+    .gwd-span-jnu9 {
+      position: absolute;
+      width: 100px;
+      height: 50px;
+      border-style: none;
+      border-radius: 45px;
+      left: -28px;
+      top: 306px;
+    }
+    .gwd-span-1msa {
+      position: absolute;
+      width: 132px;
+      height: 60px;
+      font-weight: bold;
+      font-size: 42px;
+      left: 99px;
+      top: 651px;
+    }
+    .gwd-input-5bip {
+      position: absolute;
+      width: 184px;
+      height: 39px;
+      transform-origin: 92px 19.5px 0px;
+      left: -295px;
+      top: 799px;
+    }
+    .gwd-input-1n3m {
+      position: absolute;
+      width: 174px;
+      height: 31px;
+      transform-origin: 87px 15.5px 0px;
+      left: -295px;
+      top: 839px;
+    }
+    .gwd-span-1mso {
+      position: absolute;
+      width: 310px;
+      height: 51px;
+      font-weight: bold;
+      font-size: 16px;
+      left: -295px;
+      top: 744px;
+    }
+    .gwd-span-untv {
+      position: absolute;
+      height: 152px;
+      left: 117px;
+      top: 597px;
+      width: 463px;
+      transform-origin: 231.5px 75.7008px 0px;
+    }
+    .gwd-span-12vo {
+      position: absolute;
+      border-style: solid;
+      border-image-source: none;
+      border-image-width: 1;
+      border-image-outset: 0;
+      border-image-repeat: stretch;
+      border-color: rgb(241, 6, 6);
+      text-align: center;
+      left: 389px;
+      top: 71px;
+      width: 535px;
+      height: 154px;
+      transform-origin: 270.5px 80px 0px;
+      padding: 10px;
     }
   </style>
 </head>
@@ -162,7 +240,9 @@
   <form class="gwd-form-1llj" method="POST" action="{{ url_for('test') }}" id="test_submit">
     <input type="submit" class="gwd-input-1">
     <h1 class="gwd-h1-13ve">DenseNet 121 X-Ray Prediction</h1>
-    <h1 class="gwd-h1-1rpw"><strong class="gwd-strong-ivvj">1. Choose from 201 X-Ray images from the Stanford CheXPert validation set (labeled by consensus of 5 experts)</strong><br></h1><span class="gwd-span-1b5z">2. Choose from any chest X-Ray image URL from the web</span><span class="gwd-span-97iw">Image Preview&nbsp;</span><span class="gwd-span-1g01">Prediction Probabilities</span><strong class="gwd-strong-12yq"><span class="gwd-span-1q88">OR</span><br></strong></form>
+    <h1 class="gwd-h1-1rpw"><strong class="gwd-strong-ivvj">1. Choose from 201 X-Ray images from the Stanford CheXPert test set (labeled by consensus of 5 experts)</strong><br></h1><span class="gwd-span-1b5z">2. Choose from any chest X-Ray image URL from the web</span><span class="gwd-span-97iw">Image Preview&nbsp;</span><span class="gwd-span-1g01">Prediction Probabilities</span><strong class="gwd-strong-12yq"><span class="gwd-span-1q88">OR<span class="gwd-span-jnu9" id="OR"></span></span><br></strong>
+    <span class="gwd-span-1msa">OR</span>
+  </form>
   <select class="gwd-select-mu84" form="test_submit" name="image_select">
     {% for value, file in listStatus %}
     <option value="{{value}}" {% if value== default %} selected {% endif %}>{{value}}</option>
@@ -172,7 +252,16 @@
     <input type="text" class="gwd-input-2" name="url_select">
     <input type="submit" class="gwd-input-submit">
   </form>
-
+  <form class="form-textinp" method="POST" action="{{ url_for('file_input') }}" id="file_submit" enctype="multipart/form-data">
+    <input class="gwd-input-5bip" type="file" name="file_select">
+    <input class="gwd-input-1n3m" type="submit">
+    <span class="gwd-span-1mso">3. Upload an image from a local file</span>
+    <span class="gwd-span-untv" style="white-space: pre-line;">References:
+    [1] https://stanfordmlgroup.github.io/competitions/chexpert/ 
+    [2] https://www.nih.gov/news-events/news-releases/nih-clinical-center-provides-one-largest-publicly-available-chest-x-ray-datasets-scientific-community
+    </span>
+  </form>
+   
   <table class="gwd-table-nemp">
     <tbody>
       <tr>
@@ -186,9 +275,12 @@
         <td>{{prediction}}</td>
         <td>{{true_val}}</td>
       </tr>
-    {% endfor %}
+      {% endfor %}
     </tbody>
   </table>
+  <span class="gwd-span-12vo" style="white-space: pre-line;">The chest X-Ray disease prediction model was trained using ~190,000 frontal images from the Stanford ChexPert image database [1], as well as ~120,000 images from the NIH chest X-Ray image database [2]. 
+    
+    Choose from three different methods to input frontal chest X-ray images to the prediction model on the left. Clicking "Submit" will populate the prediction in the table below and show the image preview on the right.</span>
 </body>
 
 </html>

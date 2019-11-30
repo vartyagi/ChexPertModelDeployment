@@ -20,8 +20,8 @@ df_valid = df_valid[['NewPath', 'Cardiomegaly', 'Edema', 'Atelectasis',
 
 files = df_valid['NewPath'].values
 application = Flask(__name__)
-
-
+application.config['UPLOAD_FOLDER'] = 'static'
+application.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 @application.route("/")
 def hello():
     listStatus = [(id, filename) for id, filename in enumerate(files)]
@@ -66,5 +66,19 @@ def url_input():
     return render_template('index.html', listStatus=listStatus, default=default, img1=select, model_output=model_output)
 
 
+@application.route("/file_input" , methods=['GET', 'POST'])
+def file_input():
+    # for file inputs
+
+    file = request.files['file_select']
+    file.save(os.path.join(application.config['UPLOAD_FOLDER'], 'tmp.jpg'))
+    class_pred = get_prediction(Image.open(file).convert('L'))
+    select2 = os.path.join(application.config['UPLOAD_FOLDER'], 'tmp.jpg')
+
+    model_output = [(key, class_pred[key], '?') for key in class_pred.keys()]
+    listStatus = [(id, filename) for id, filename in enumerate(files)]
+    default = 201
+    return render_template('index.html', listStatus=listStatus, default=default, img1=select2, model_output=model_output)
+
 if __name__ == '__main__':
-    application.run(debug=False, port=int(os.environ.get('PORT', 5000)))
+    application.run(debug=False, port=int(os.environ.get('PORT', 5000)), extra_files=['./static/tmp.jpg'])

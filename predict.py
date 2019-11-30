@@ -5,7 +5,7 @@ import torch
 model = get_model()
 model.eval()
 labels_list = ['Cardiomegaly', 'Edema', 'Atelectasis', 'Pleural Effusion', 'Consolidation']
-thresholds = [0.22, 0.56, 0.38, 0.31, 0.43]
+thresholds = [0.3, 0.58, 0.4, 0.6, 0.49]
 
 
 def weighted_sig(x, thresholds):

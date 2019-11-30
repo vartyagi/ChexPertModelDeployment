@@ -5,7 +5,7 @@ import torch.nn as nn
 
 def get_model():
     num_classes = 5
-    model = 'static/densenet_model_t8_gc_small_v4.mdl'
+    model = 'static/densenet_model_t8_gc_small_v6b_nih.mdl'
     model_ft = models.densenet121()
     num_ftrs = model_ft.classifier.in_features
     model_ft.classifier = nn.Linear(num_ftrs, num_classes)
